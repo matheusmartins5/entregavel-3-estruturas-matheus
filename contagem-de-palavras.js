@@ -507,10 +507,10 @@ for (const palavra of texto) {
     contadorVetor.push([palavra, 1]);
   }
 }
-
 console.log("Resultado vetor:", contadorVetor);
 console.timeEnd("Vetor");
 
+console.time("HashTable");
 const tabela = new HashTable(texto.length);
 
 for (const palavra of texto) {
@@ -522,5 +522,4 @@ for (const palavra of texto) {
   }
 }
 console.log("Resultado HashTable:", tabela.toObject());
-console.time("HashTable");
 console.timeEnd("HashTable");
