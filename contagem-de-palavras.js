@@ -495,11 +495,15 @@ console.time("Vetor");
 const contadorVetor = [];
 
 for (const palavra of texto) {
-  const indice = contadorVetor.findIndex(([p]) => p === palavra);
-
-  if (indice >= 0) {
-    contadorVetor[indice][1]++;
-  } else {
+  let achou = false;
+  for (const item of contadorVetor) {
+    if (item[0] === palavra) {
+      item[1]++;
+      achou = true;
+      break;
+    }
+  }
+  if (!achou) {
     contadorVetor.push([palavra, 1]);
   }
 }
@@ -507,18 +511,16 @@ for (const palavra of texto) {
 console.log("Resultado vetor:", contadorVetor);
 console.timeEnd("Vetor");
 
-console.time("HashTable");
-const tabela = new HashTable(2 * texto.length);
+const tabela = new HashTable(texto.length);
 
 for (const palavra of texto) {
-  const atual = tabela.get(palavra);
-
-  if (atual !== null) {
-    tabela.set(palavra, atual + 1);
+  const valorAtual = tabela.get(palavra);
+  if (valorAtual !== null) {
+    tabela.set(palavra, valorAtual + 1);
   } else {
     tabela.set(palavra, 1);
   }
 }
-
 console.log("Resultado HashTable:", tabela.toObject());
+console.time("HashTable");
 console.timeEnd("HashTable");
